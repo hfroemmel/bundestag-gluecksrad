@@ -1,0 +1,55 @@
+{
+  "name": "bundestag-gluecksrad",
+  "version": "1.0.0",
+  "description": "Glücksrad-Quiz – Deutscher Bundestag",
+  "private": true,
+  "main": "electron/main.cjs",
+  "author": "Deutscher Bundestag",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "start": "vite build && electron .",
+    "dist:win": "vite build && electron-builder --win portable --x64",
+    "dist:mac": "vite build && electron-builder --mac dmg zip",
+    "dist": "vite build && electron-builder --win portable --mac dmg zip --x64 --arm64"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^5.4.11"
+  },
+  "build": {
+    "appId": "de.bundestag.gluecksrad",
+    "productName": "Gluecksrad-Quiz",
+    "files": [
+      "dist/**",
+      "electron/**",
+      "package.json"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "compression": "maximum",
+    "electronLanguages": [
+      "de"
+    ],
+    "win": {
+      "target": "portable",
+      "artifactName": "${productName}.exe"
+    },
+    "portable": {
+      "artifactName": "${productName}.exe"
+    },
+    "mac": {
+      "category": "public.app-category.education",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "artifactName": "${productName}-${arch}.${ext}"
+    }
+  }
+}

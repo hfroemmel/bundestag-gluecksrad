@@ -1,0 +1,41 @@
+@font-face {
+  font-family: 'Meliora';
+  src: url('./fonts/MeliorCom.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Meliora';
+  src: url('./fonts/MeliorCom-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+html, body, #root { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body { -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+
+/* Feste Gestaltungsfläche 960 x 540, per transform gleichmäßig eingepasst und zentriert. */
+.stage {
+  position: absolute; left: 0; top: 0; width: 960px; height: 540px;
+  transform-origin: 0 0; background: #000; overflow: hidden;
+  font-family: 'Meliora', serif; color: #fff;
+}
+.stage > * { position: absolute; }
+
+.txt { margin: 0; white-space: pre; line-height: 1; }
+.abs { position: absolute; display: block; }
+
+.bar { background: #6bb74c; }
+
+.hit {
+  position: absolute; padding: 0; margin: 0; border: 0; border-radius: 50%;
+  background: transparent; cursor: pointer; touch-action: manipulation; outline: none;
+}
+.hit:focus-visible { box-shadow: 0 0 0 2px #fff; }
+
+.num-btn {
+  position: absolute; left: 815.2px; top: 410px; width: 113.4px; height: 113.4px;
+  border-radius: 50%; background: #cd237c; border: 0; padding: 0; cursor: pointer;
+  touch-action: manipulation; outline: none; font: inherit; color: #fff;
+}
+.num-btn:focus-visible { box-shadow: 0 0 0 3px #fff; }
