@@ -10,6 +10,7 @@ Läuft vollständig offline; alle Grafiken und Schriften sind im Paket enthalten
 * Auflösung: denselben Zahlenkreis nochmals anklicken → zurück zum Home-Screen.
 * Seitenzuordnung der PDF: Home = Seite 1, Frage *n* = Seite 2*n*, Auflösung *n* = Seite 2*n*+1.
 * `F11` = Vollbild, `Esc` = Vollbild verlassen.
+* Übergänge: kurze Überblendungen (ca. 0,2–0,4 s) mit minimaler Bewegung; der grüne Auflösungsbalken fährt auf. `prefers-reduced-motion` schaltet sie ab.
 
 ## Entwicklung
 
@@ -37,6 +38,7 @@ Ergebnisse als Artefakte). Die macOS-App ist unsigniert – beim ersten Start Re
 | Pfad | Inhalt |
 | --- | --- |
 | `electron/main.cjs` | Electron-Hauptprozess (lädt `dist/index.html` per `file://`) |
+| `src/Presence.jsx` | Ein-/Ausblenden der Ebenen beim Zustandswechsel (Animationen in `src/styles.css`) |
 | `src/Stage.jsx` | feste Fläche 960 × 540, gleichmäßig skaliert und zentriert (Rest schwarz) |
 | `src/Home.jsx`, `src/QuestionPage.jsx` | Home-Screen bzw. Frage-/Auflösungsseite |
 | `src/content.js` | alle Texte samt Position, Größe, Fettschrift und Balken je Seite (aus der PDF extrahiert) |

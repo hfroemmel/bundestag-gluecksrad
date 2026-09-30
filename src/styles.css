@@ -39,3 +39,31 @@ body { -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color
   touch-action: manipulation; outline: none; font: inherit; color: #fff;
 }
 .num-btn:focus-visible { box-shadow: 0 0 0 3px #fff; }
+
+/* Übergänge: dezent und flüssig (Blenden mit minimaler Bewegung). Ebenen liegen deckungsgleich auf der Fläche. */
+.layer { position: absolute; left: 0; top: 0; width: 960px; height: 540px; pointer-events: none; }
+.layer > .hit, .layer > .num-btn { pointer-events: auto; }
+
+.layer { --ease: cubic-bezier(0.22, 0.61, 0.36, 1); }
+.layer.rise { --from: translateY(8px); }
+.layer.zoom { --from: scale(0.985); transform-origin: 240px 312px; }
+.layer.pop  { --from: scale(0.86); transform-origin: 872px 467px; }
+.layer.enter { animation: layer-in 380ms var(--ease) 100ms both; }
+.layer.leave { animation: layer-out 200ms ease-in both; }
+@keyframes layer-in  { from { opacity: 0; transform: var(--from); } to { opacity: 1; transform: none; } }
+@keyframes layer-out { from { opacity: 1; } to { opacity: 0; } }
+
+/* grüner Auflösungsbalken fährt von der Mitte aus auf */
+.layer.enter .bar { animation: bar-in 420ms var(--ease) 60ms both; }
+@keyframes bar-in { from { transform: scaleY(0.2); } to { transform: none; } }
+
+/* Rückmeldung bei Berührung/Maus */
+.num-btn { transition: transform 140ms var(--ease, ease), filter 140ms ease; }
+.num-btn:active { transform: scale(0.965); }
+.hit { transition: box-shadow 160ms ease, background-color 160ms ease; }
+.hit:active { background-color: rgba(255, 255, 255, 0.18); }
+@media (hover: hover) { .hit:hover { box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6); } .num-btn:hover { filter: brightness(1.07); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .layer.enter, .layer.leave, .layer.enter .bar { animation-duration: 1ms; animation-delay: 0s; }
+}

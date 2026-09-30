@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './Header.jsx';
 import Text from './Text.jsx';
 import wheel from './assets/wheel.webp';
 import { HOME_TITLE, WHEEL_NUMBERS } from './content.js';
@@ -9,7 +8,6 @@ const PAD = 3; // Klickfläche etwas größer als die weiße Zahlenscheibe (Radi
 export default function Home({ onPick }) {
   return (
     <>
-      <Header />
       {/* Glücksrad (Originalgrafik aus der PDF, Ausschnitt x 50–430, y 115–500) */}
       <img className="abs" src={wheel} alt="" draggable={false} style={{ left: 50, top: 115, width: 380, height: 385 }} />
       <Text {...HOME_TITLE} />

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Stage from './Stage.jsx';
 import Home from './Home.jsx';
-import QuestionPage from './QuestionPage.jsx';
+import Header from './Header.jsx';
+import Presence from './Presence.jsx';
+import { QuestionContent, NumberButton } from './QuestionPage.jsx';
 import { QUESTIONS } from './content.js';
 
 // view: { n: null }            -> Home
@@ -14,16 +16,19 @@ export default function App() {
   useEffect(() => { document.fonts?.load('22px Meliora'); document.fonts?.load('700 22px Meliora'); }, []);
 
   const q = view.n && QUESTIONS[view.n - 1];
+  const toggle = () => setView(view.answer ? { n: null, answer: false } : { n: q.n, answer: true });
   return (
     <Stage>
-      {!q && <Home onPick={(n) => setView({ n, answer: false })} />}
-      {q && (
-        <QuestionPage
-          q={q}
-          answer={view.answer}
-          onNumber={() => setView(view.answer ? { n: null, answer: false } : { n: q.n, answer: true })}
-        />
-      )}
+      <Header />
+      <Presence id={q ? null : 'home'} variant="zoom">
+        {!q && <Home onPick={(n) => setView({ n, answer: false })} />}
+      </Presence>
+      <Presence id={q ? `${q.n}-${view.answer ? 'a' : 'q'}` : null}>
+        {q && <QuestionContent q={q} answer={view.answer} />}
+      </Presence>
+      <Presence id={q ? q.n : null} variant="pop">
+        {q && <NumberButton q={q} answer={view.answer} onClick={toggle} />}
+      </Presence>
     </Stage>
   );
 }
