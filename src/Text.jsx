@@ -8,9 +8,10 @@ const baselineOffset = (s) => {
 };
 
 /** Text-Span aus der PDF: (x, y) = linker Rand / Grundlinie in Designpunkten. Zeilenumbrüche sind fest. */
-export default function Text({ x, y, s, b, t }) {
+export default function Text({ x, y, s, b, t, c, className = '' }) {
   return (
-    <p className="txt abs" style={{ left: x, top: y - baselineOffset(s), fontSize: s, fontWeight: b ? 700 : 400 }}>
+    <p className={`txt abs ${className}`}
+      style={{ left: x, top: y - baselineOffset(s), fontSize: s, fontWeight: b ? 700 : 400, ...(c && { color: c }) }}>
       {t}
     </p>
   );
