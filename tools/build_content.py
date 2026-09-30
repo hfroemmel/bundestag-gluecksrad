@@ -28,6 +28,9 @@ def conv(pg, green=True):
 fmt = lambda o: json.dumps(o, ensure_ascii=False, separators=(",", ":"))
 home = conv(pages[0])
 ji, _, jbar, jimg = conv(pages[39], green=False)
+# Tippfehler der PDF ("Jocker") korrigiert; der Text ist zentriert gesetzt -> x so verschieben, dass die Mitte gleich bleibt
+assert ji[0]['t'] == 'Jocker'
+ji[0].update(t='Joker', x=420.61)
 out = ["// Automatisch aus Gluecksradquiz.pdf erzeugt (tools/build_content.py). Koordinaten in PDF-Punkten (960 x 540), y = Grundlinie.",
        "export const HOME_TITLE = " + fmt(home[0][0]) + ";",
        "// Klickflächen auf dem Glücksrad (Mittelpunkt und Radius der weißen Scheiben): Zahlen 1-19 und die drei Adlerfelder (Joker).",
